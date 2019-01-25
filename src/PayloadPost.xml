@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PayloadPost</name>
+    </assembly>
+    <members>
+        <member name="T:PayloadPost.Controllers.Api.AlertNotificationController">
+            <summary>
+            Capture action related to a trasaction
+            </summary>
+        </member>
+        <member name="T:PayloadPost.Controllers.Api.ContactNotificationController">
+            <summary>
+            Capture action related to a trasaction
+            </summary>
+        </member>
+        <member name="T:PayloadPost.Controllers.Api.IdentityNotificationController">
+            <summary>
+            Capture action related to a trasaction
+            </summary>
+        </member>
+        <member name="T:PayloadPost.Controllers.PaymentNotificationController">
+            <summary>
+            Capture action related to a trasaction
+            </summary>
+        </member>
+        <member name="T:PayloadPost.Controllers.EmailRenderController">
+            <summary>
+            Assistant to render and show examples of email templates.
+            Each route display an exmaple of one email template view.
+            </summary>
+        </member>
+        <member name="M:PayloadPost.Controllers.EmailRenderController.Alert">
+            <summary>
+            Render and show example of Alert template.
+            </summary>
+        </member>
+        <member name="M:PayloadPost.Controllers.EmailRenderController.Contact">
+            <summary>
+            Render and show example of Alert template.
+            </summary>
+        </member>
+        <member name="M:PayloadPost.Controllers.EmailRenderController.ResetPassword">
+            <summary>
+            Render and show example of Reset Password template.
+            </summary>
+        </member>
+        <member name="M:PayloadPost.Controllers.EmailRenderController.ConfirmEmail">
+            <summary>
+            Render and show example of Confirmation Account Email  template.
+            </summary>
+        </member>
+        <member name="M:PayloadPost.Controllers.EmailRenderController.PaymentBoleto">
+            <summary>
+            Render and show example of Payment Boleto template.
+            </summary>
+        </member>
+        <member name="M:PayloadPost.Controllers.EmailRenderController.PaymentBoletoReminder">
+            <summary>
+            Render and show example of Payment Boleto template.
+            </summary>
+        </member>
+    </members>
+</doc>

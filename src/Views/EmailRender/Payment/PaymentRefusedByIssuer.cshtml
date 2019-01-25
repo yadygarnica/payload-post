@@ -1,0 +1,54 @@
+﻿@model PayloadPost.Models.PaymentRefusedViewModel
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Dadivar | Doação Confirmada</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body bgcolor="#f1f1f1">
+<!-- Save for Web Slices (boleto pendente.psd) -->
+    <table id="Table_01" width="520" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr>
+            <td>
+                <img style="display: block" src="https://localhost:44382/images/topo.png" alt="" />
+            </td>
+        </tr>
+        <tr>
+            <td style="background-image: url(https://localhost:44382/images/middle.png); background-repeat: repeat-y; text-align: center; padding: 0 60px 30px">
+
+                <p><img style="margin-bottom: 30px" src="http://localhost/images/ico-alert.png" alt="" /></p>
+
+                <h2 style="font-size: 18px; color: #696969; font-weight: 300; font-family: Arial">Olá, <span style="color: #e889c8">@Model.CustomerName</span></h2>
+
+                <p style="font-size: 16px; color: #696969; font-family: Arial; margin-bottom: 0px;">
+                    A sua doação não foi autorizada. Por favor, entre em
+                    contato com o banco emissor do seu cartão de crédito.
+                </p>
+
+                <p style="font-size: 16px; color: #696969; font-family: Arial; margin-bottom: 0px;">
+                    Caso o problema não seja solucionado, entre em contato com a
+                    equipe dadivar através do email: <span style="color: #6a48d2">oi@dadivar.com.br</span>
+                </p>
+
+                <p style="font-size: 16px; color: #696969; font-family: Arial; margin-bottom: 0px;">Adoramos a sua colaboração e estamos torcendo por você!</p>
+
+            </td>
+        </tr>
+        <tr>
+            <td style="background-image: url(https://localhost:44382/images/footer.png); background-repeat: no-repeat; text-align: center; height: 105px">
+                <p style="font-size: 13px; color: #b8b8b8; font-family: Arial; ">Serviço de Email oferecido por <a href="http://www.PayloadPost.com">PayloadPost</a></p>
+
+                <table align="center" width="150px" style="margin-bottom: 30px;">
+                    <tr>
+                        <td><a href=""><img src="https://localhost:44382/images/ico-facebook.png" alt="" /></a></td>
+                        <td><a href=""><img src="https://localhost:44382/images/ico-instagram.png" alt="" /></a></td>
+                        <td><a href=""><img src="https://localhost:44382/images/ico-twitter.png" alt="" /></a></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+<!-- End Save for Web Slices -->
+</body>
+</html>
