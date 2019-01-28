@@ -13,18 +13,11 @@ namespace PayloadPost.Controllers.Api
     [ApiController]
     public class IdentityNotificationController : NotificationController
     {
-        private readonly IEmailService _emailService;
-        private readonly IHtmlContentRenderer _viewRenderer;
-        private readonly IPlainTextContentRenderer _plainTextContentRenderer;
-
         public IdentityNotificationController(IEmailService emailService
-            , IHtmlContentRenderer viewRenderer
-            , IPlainTextContentRenderer plainTextContentRenderer)
-        {
-            this._emailService = emailService;
-            this._viewRenderer = viewRenderer;
-            this._plainTextContentRenderer = plainTextContentRenderer;
-        }
+            , IPlainTextContentRenderer plainTextContentRenderer
+            , IHtmlContentRenderer viewRenderer) : base(emailService, plainTextContentRenderer
+            , viewRenderer)
+        { }
 
         // POST api/capture
         [HttpPost]
@@ -54,8 +47,8 @@ namespace PayloadPost.Controllers.Api
             model.CompanyName = companyName;
 
 
-            var htmlContent = await this._viewRenderer.RenderViewToString("Views/EmailRender/Identity/ConfirmEmail.cshtml", model);
-            var plainTextContent = this._plainTextContentRenderer.RenderModelToString(new
+            var htmlContent = await base._viewRenderer.RenderViewToString("Views/Identity/ConfirmEmail.cshtml", model);
+            var plainTextContent = base._plainTextContentRenderer.RenderModelToString(new
             {
                 Memsagem = $"Olá {customerName}! Criamos uma conta para você. Confirme o seu email e escolha uma nova senha",
                 Link = confirmLink
@@ -82,8 +75,8 @@ namespace PayloadPost.Controllers.Api
             model.CustomerName = customerName;
             model.ResetLink = resetLink;
 
-            var htmlContent = await this._viewRenderer.RenderViewToString("Views/EmailRender/Identity/ResetPassword.cshtml", model);
-            var plainTextContent = this._plainTextContentRenderer.RenderModelToString(new
+            var htmlContent = await base._viewRenderer.RenderViewToString("Views/Identity/ResetPassword.cshtml", model);
+            var plainTextContent = base._plainTextContentRenderer.RenderModelToString(new
             {
                 Memsagem = $"Olá {customerName}! Entre no link e escolha uma nova senha",
                 Link = resetLink
@@ -100,7 +93,7 @@ namespace PayloadPost.Controllers.Api
                 FromName = companyName,
             };
 
-            await this._emailService.SendEmail(emailDetail);
+            await base._emailService.SendEmail(emailDetail);
         }
     }
 }

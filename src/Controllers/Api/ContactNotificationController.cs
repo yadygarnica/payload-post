@@ -15,21 +15,10 @@ namespace PayloadPost.Controllers.Api
     [ApiController]
     public class ContactNotificationController : NotificationController
     {
-
-        private readonly IEmailService _emailService;
-        private readonly IConfiguration _configuration;
-        private readonly IPlainTextContentRenderer _plainTextContentRenderer;
-        private readonly IHtmlContentRenderer _viewRenderer;
-
         public ContactNotificationController(IEmailService emailService
             , IConfiguration configuration, IPlainTextContentRenderer plainTextContentRenderer
-            , IHtmlContentRenderer viewRenderer)
-        {
-            this._emailService = emailService;
-            this._configuration = configuration;
-            this._plainTextContentRenderer = plainTextContentRenderer;
-            this._viewRenderer = viewRenderer;
-        }
+            , IHtmlContentRenderer viewRenderer):base(emailService, plainTextContentRenderer
+            ,  viewRenderer){}
 
         // POST api/capture
         [HttpPost]
@@ -42,7 +31,7 @@ namespace PayloadPost.Controllers.Api
         private async Task SendUserContact(ContactNotification model)
         {
 
-            var htmlContent = await this._viewRenderer.RenderViewToString("Views/EmailRender/Admin/ContactFromUser.cshtml", new ContactFromUserViewModel()
+            var htmlContent = await base._viewRenderer.RenderViewToString("Views/Admin/ContactFromUser.cshtml", new ContactFromUserViewModel()
             {
                 CompanyName = model.CompanyName,
                 CostumerEmail = model.CostumerEmail,
@@ -51,7 +40,7 @@ namespace PayloadPost.Controllers.Api
                 Subject = model.Subject
             });
 
-            var plainTextContent = this._plainTextContentRenderer.RenderModelToString(new
+            var plainTextContent = base._plainTextContentRenderer.RenderModelToString(new
             {
                 Nome = model.CostumerName,
                 Email = model.CostumerEmail,
@@ -70,7 +59,7 @@ namespace PayloadPost.Controllers.Api
                 FromName = model.CostumerName,
             };
 
-            await this._emailService.SendEmail(emailDetail);
+            await base._emailService.SendEmail(emailDetail);
         }
     }
 }

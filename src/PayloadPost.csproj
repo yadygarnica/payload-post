@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>PayloadPost</RootNamespace>
     <AssemblyName>PayloadPost</AssemblyName>
+    <UserSecretsId>b2e2b026-5dbc-4558-8ab3-4b9184be85ad</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -34,19 +35,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\EmailRender\Admin\ContactFromUser.cshtml">
+    <Content Update="Views\Admin\ContactFromUser.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\EmailRender\Identity\ConfirmEmail.cshtml">
+    <Content Update="Views\Identity\ConfirmEmail.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\EmailRender\Payment\PaymentBoleto.cshtml">
+    <Content Update="Views\Payment\PaymentBoleto.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\EmailRender\Identity\ResetPassword.cshtml">
+    <Content Update="Views\Identity\ResetPassword.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\EmailRender\Payment\PaymentBoletoReminder.cshtml">
+    <Content Update="Views\Payment\PaymentBoletoReminder.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

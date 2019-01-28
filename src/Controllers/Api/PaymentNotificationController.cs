@@ -3,28 +3,23 @@ using PayloadPost.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using PayloadPost.ViewRenders.Interfaces;
 using System.Threading.Tasks;
+using PayloadPost.Controllers.Api;
 
-namespace PayloadPost.Controllers
+namespace PayloadPost.Controllers.Api
 {
     /// <summary>
     /// Capture action related to a trasaction
     /// </summary>
     [Route("api/payment-notification")]
     [ApiController]
-    public class PaymentNotificationController : ControllerBase
+    public class PaymentNotificationController : NotificationController
     {
-        private readonly IEmailService _emailService;
-        private readonly IHtmlContentRenderer _viewRenderer;
-        private readonly IPlainTextContentRenderer _plainTextContentRenderer;
-
         public PaymentNotificationController(IEmailService emailService
-            , IHtmlContentRenderer viewRenderer, IPlainTextContentRenderer plainTextContentRenderer)
-        {
-            this._emailService = emailService;
-            this._viewRenderer = viewRenderer;
-            this._plainTextContentRenderer = plainTextContentRenderer;
-        }
-        
+            , IPlainTextContentRenderer plainTextContentRenderer
+            , IHtmlContentRenderer viewRenderer) : base(emailService, plainTextContentRenderer
+            , viewRenderer)
+        { }
+
         // POST api/capture
         [HttpPost]
         public async Task<IActionResult> PostAsync(PaymentNotification request)
@@ -54,8 +49,8 @@ namespace PayloadPost.Controllers
             PaymentConfirmedViewModel model = new PaymentConfirmedViewModel();
             model.CustomerName = customerName;
 
-            var htmlContent = await this._viewRenderer.RenderViewToString("Views/EmailRender/Payment/PaymentConfirmed.cshtml", model);
-            var plainTextContent = this._plainTextContentRenderer.RenderModelToString(new
+            var htmlContent = await base._viewRenderer.RenderViewToString("Views/Payment/PaymentConfirmed.cshtml", model);
+            var plainTextContent = base._plainTextContentRenderer.RenderModelToString(new
             {
                 Memsagem = $"Olá {customerName}! Seu pagamento foi confirmado",
             });
@@ -71,7 +66,7 @@ namespace PayloadPost.Controllers
                 FromName = companyName
             };
 
-            await this._emailService.SendEmail(emailDetail);
+            await base._emailService.SendEmail(emailDetail);
         }
 
         private async Task SendBoleto(string customerName, string customerEmail,
@@ -81,8 +76,8 @@ namespace PayloadPost.Controllers
             model.BoletoLink = boletoUrl;
             model.CustomerName = customerName;
 
-            var htmlContent = await this._viewRenderer.RenderViewToString("Views/EmailRender/Payment/PaymentBoleto.cshtml", model);
-            var plainTextContent = this._plainTextContentRenderer.RenderModelToString(new
+            var htmlContent = await base._viewRenderer.RenderViewToString("Views/Payment/PaymentBoleto.cshtml", model);
+            var plainTextContent = base._plainTextContentRenderer.RenderModelToString(new
             {
                 Memsagem = $"Olá {customerName}! Seu boleto foi gerado, entre no link para obte-lo",
                 BoletoLink = boletoUrl
@@ -99,7 +94,7 @@ namespace PayloadPost.Controllers
                 FromName = companyName
             };
 
-            await this._emailService.SendEmail(emailDetail);
+            await base._emailService.SendEmail(emailDetail);
         }
 
         private async Task SendReceivedOrder(string customerName, string customerEmail,
@@ -109,8 +104,8 @@ namespace PayloadPost.Controllers
             model.CustomerName = customerName;
             model.AmountInCents = amountInCents;
 
-            var htmlContent = await this._viewRenderer.RenderViewToString("Views/EmailRender/Payment/ReceivedOrder.cshtml", model);
-            var plainTextContent = this._plainTextContentRenderer.RenderModelToString(new
+            var htmlContent = await base._viewRenderer.RenderViewToString("Views/Payment/ReceivedOrder.cshtml", model);
+            var plainTextContent = base._plainTextContentRenderer.RenderModelToString(new
             {
                 Memsagem = $"Olá {customerName}! Recebemos seu pedido",
             });
@@ -125,7 +120,7 @@ namespace PayloadPost.Controllers
                 FromEmail = companyEmail,
                 FromName = companyName
             };
-            await this._emailService.SendEmail(emailDetail);
+            await base._emailService.SendEmail(emailDetail);
         }
 
         private async Task SendRefusedPayment(string customerName, string customerEmail,
@@ -134,8 +129,8 @@ namespace PayloadPost.Controllers
             PaymentRefusedViewModel model = new PaymentRefusedViewModel();
             model.CustomerName = customerName;
 
-            var htmlContent = await this._viewRenderer.RenderViewToString("Views/EmailRender/Payment/PaymentRefusedByIssuer.cshtml", model);
-            var plainTextContent = this._plainTextContentRenderer.RenderModelToString(new
+            var htmlContent = await base._viewRenderer.RenderViewToString("Views/Payment/PaymentRefusedByIssuer.cshtml", model);
+            var plainTextContent = base._plainTextContentRenderer.RenderModelToString(new
             {
                 Memsagem = $"Olá {customerName}! Seu pagamento foi rejeitado",
                 Motivos = refusedReason
@@ -152,7 +147,7 @@ namespace PayloadPost.Controllers
                 FromName = companyName
             };
 
-            await this._emailService.SendEmail(emailDetail);
+            await base._emailService.SendEmail(emailDetail);
         }
     }
 }
