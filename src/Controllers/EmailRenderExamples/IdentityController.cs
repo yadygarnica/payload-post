@@ -10,7 +10,7 @@ namespace PayloadPost.Controllers
     /// </summary>
     [Route("email-samples/identity")]
     // [ApiExplorerSettings(IgnoreApi = true)]
-    public class IdentityEmailSamplesController : Controller
+    public class IdentityController : Controller
     {
         /// <summary>
         /// Render and show example of Reset Password template.

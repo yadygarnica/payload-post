@@ -10,7 +10,7 @@ namespace PayloadPost.Controllers
     /// </summary>
     [Route("email-samples/payment")]
     // [ApiExplorerSettings(IgnoreApi = true)]
-    public class PaymentEmailSamplesController : Controller
+    public class PaymentController : Controller
     {
         /// <summary>
         /// Render and show example of Payment Boleto template.

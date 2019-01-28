@@ -10,7 +10,7 @@ namespace PayloadPost.Controllers
     /// </summary>
     [Route("email-samples/admin")]
     // [ApiExplorerSettings(IgnoreApi = true)]
-    public class AdminEmailSamplesController : Controller
+    public class AdminController : Controller
     {
         /// <summary>
         /// Render and show example of Alert template.

@@ -17,8 +17,8 @@ namespace PayloadPost.Filters
                 Name = "x-token",
                 In = "header",
                 Type = "string",
-                Required = false,
-                Default = "Bearer "
+                Required = true,
+                Default = " "
             });
         }
     }
