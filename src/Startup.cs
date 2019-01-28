@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
+using PayloadPost.Filters;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace PayloadPost
 {
@@ -25,7 +27,11 @@ namespace PayloadPost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options => 
+            {
+                options.Filters.Add(new XTokenAuthorizationFilter(this.Configuration["Authentication"]));
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<IConfiguration>(this.Configuration);
 
@@ -45,10 +51,10 @@ namespace PayloadPost
                 var xmlFile = $"PayloadPost.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+
+                c.OperationFilter<AddXTokenSwaggerOperationFilter>();
             });
-
             
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
